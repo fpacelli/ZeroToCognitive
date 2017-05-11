@@ -58,6 +58,7 @@ http.createServer(app).listen(app.get('port'),
 function loadSelectedFile(req, res) {
     var uri = req.originalUrl;
     var filename = __dirname + "/HTML" + uri;
+	console.log('Filename: ' + filename);
     fs.readFile(filename,
         function(err, data) {
             if (err) {

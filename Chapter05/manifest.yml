@@ -2,11 +2,11 @@ applications:
 - path: .
   memory: 256M
   instances: 1
-  domain: mybluemix.net
-  name: Z2C
-  host: Z2C
+  domain: eu-gb.mybluemix.net
+  name: Z2Cfp
+  host: Z2Cfp
   disk_quota: 1024M
   services:
-    - Speech to Text-xx
-    - Text to Speech-xx
-    - Natural Language Classifier-xx
+    - Speech to Text-gt
+    - Text to Speech-wn
+    - Natural Language Classifier-wl

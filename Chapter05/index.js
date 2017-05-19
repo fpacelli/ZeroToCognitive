@@ -25,6 +25,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var cfenv = require('cfenv');
 
+
 var vcapServices = require('vcap_services');
 
 var appEnv = cfenv.getAppEnv();
@@ -39,16 +40,27 @@ app.set('port', process.env.PORT || 6003);
 // enable the following line in Bluemix
 // app.set('port', appEnv.port);
 
+
+
+
+
 app.set('views', path.join(__dirname + '/HTML'));
+
 app.engine('html', require('ejs').renderFile);
+
 app.set('view engine', 'ejs');
+
 app.use(express.static(__dirname + '/HTML'));
+
 app.use(bodyParser.json());
+
 
 // Define your own router file in controller folder, export the router, add it into the index.js.
 // app.use('/', require("./controller/yourOwnRouter"));
 
 app.use('/', require("./controller/restapi/router"));
+
+
 
 http.createServer(app).listen(app.get('port'),
     function(req, res) {

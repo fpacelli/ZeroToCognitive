@@ -16,11 +16,39 @@
 // displayNLC results
 function checkNLC(_display, _source)
 {
-
+  var options = {};
+  options.cquery = _source[0].innerText;
+  $.when($.get(_display), $.post('/api/understand/classifyInd', options)).done(function(_page, _nlc_results){
+    console.log("page returned");
+    var _target= $("#modal");
+    _target.append(_page);
+    _target.height($(window).height());
+    _target.show();
+    _data = _nlc_results[0];
+    _classes = JSON.parse(JSON.parse(_data).results).classes;
+    displayNLC($("#industryResult"), _classes);
+    closeNLC=$("#close_NLC");
+    closeNLC.on("click", function(){
+      console.log("closeNLC clicked.")
+      $("#modal").empty();
+    });
+});
 
 }
 function displayNLC(_target, _results)
 {
-
-
+  var target = _target;
+  target.find("tr:not(:first)").remove();
+  indName = _results[0]["class_name"];
+  var len = _results.length;
+  _idx = 0;
+  while (_idx < len)
+  {
+    (function(_idx, data)
+      {  _cStr = data[_idx]["class_name"];
+        target.append("<tr><td style='width: 60%'>"+_cStr +"</td><td>"+data[_idx]["confidence"]+"</td></tr>");})
+      (_idx, _results)
+    _idx++;
+  }
+  target.append("</table>");
 }
